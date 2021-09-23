@@ -1,4 +1,6 @@
-## Register
+# EndPoints
+
+### Register
 
 #### Request
 
@@ -24,7 +26,7 @@ content-type: application/json
 }
 ```
 
-## Login
+### Login
 
 #### Request
 
@@ -45,3 +47,35 @@ content-type: application/json
   "isAuthenticated": true
 }
 ```
+
+### Logout
+
+#### Request
+
+```rest
+POST http://localhost:,<PORT>/logout
+```
+#### Response
+
+```
+Found. Redirecting to /
+```
+
+### Profile
+
+#### Request
+
+```rest
+POST http://localhost:,<PORT>/profile
+```
+#### Response
+
+```json
+{
+  "message": "You did it!",
+  "user": {
+    "email": "user@test.com"
+  }
+}
+```
+
