@@ -1,4 +1,6 @@
-## Request
+##Login
+
+#### Request
 
 ```rest
 POST http://localhost:,<PORT>/login/local
