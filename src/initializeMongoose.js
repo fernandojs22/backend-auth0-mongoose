@@ -1,14 +1,17 @@
 require('dotenv').config()
+const { compare } = require('bcrypt')
 const mongoose = require('mongoose')
 
 const ops = {
-    server: { auto_connect: false},
+    server: { auto_connect: false },
     user: process.env.MONGODB_USER,
-    password: process.env.MONGODB_PASSWORD,
+    password: process.env.MONGODB_PASSWORD
 }
-const uri = `${process.env.MONGODB_SERVER}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DATABASE}`
+const uri = `mongodb+srv://${process.env.MONGODB_SERVER}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DATABASE}`
+const uri_usr = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_SERVER}/${process.env.MONGODB_DATABASE}`
 
 module.exports = initializeMongoose = () => {
+
     // return mongoose.createConnection(
     //     uri,
     //     ops,
@@ -17,13 +20,10 @@ module.exports = initializeMongoose = () => {
     //     }
     // )
 
-    /*BORRAR*/
-    return mongoose.connect('mongodb+srv://fernandojs:admin@cluster0.onryd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+    return mongoose.connect(uri_usr,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        // useCreateIndex: true
     }, () => {
         console.log('Mongoose is connected')
     })
-    /*BORRAR*/
 }

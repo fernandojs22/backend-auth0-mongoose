@@ -1,15 +1,12 @@
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
-module.exports = loginRoute = (express) => {
-
-  const router = express.Router()
+module.exports = loginRoute = (router) => {
 
   router.post('/login/local', async (req, res, next) => {
     passport.authenticate('login-local-email', async (err, user, info) => {
       try {
         if (err || !user) {
-          console.log(err)
           const error = new Error('new Error')
           return next(error)
         }
@@ -26,4 +23,5 @@ module.exports = loginRoute = (express) => {
       }
     })(req, res, next)
   })
+  
 }
