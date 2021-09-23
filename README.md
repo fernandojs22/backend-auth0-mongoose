@@ -1,3 +1,29 @@
+## Register
+
+#### Request
+
+```rest
+POST http://localhost:,<PORT>/register
+content-type: application/json
+
+{
+    "email": "user@test.com",
+    "password": "123456"
+}
+```
+#### Response
+
+```json
+{
+  "message": "Signup successful",
+  "user": {
+    "email": "user@test.com",
+    "_id": "614bed619fe87bba4030f1ed",
+    "__v": 0
+  }
+}
+```
+
 ## Login
 
 #### Request
