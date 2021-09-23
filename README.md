@@ -9,7 +9,7 @@ content-type: application/json
     "password": "123456"
 }
 ```
-## Response
+### Response
 
 ```json
 {
