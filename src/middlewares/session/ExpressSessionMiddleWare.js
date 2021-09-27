@@ -5,11 +5,11 @@ const passport = require('passport')
 
 module.exports = expressSessionMiddleWare = (app) => {
 
-    app.use(cookieParser(process.env.TOP_SECRET))
+    app.use(cookieParser(process.env.ACCESS_TOKEN_SECRET))
 
     app.use(
         session({
-        secret: process.env.TOP_SECRET,
+        secret: process.env.ACCESS_TOKEN_SECRET,
         resave: false,
         saveUninitialized: true
     }))
