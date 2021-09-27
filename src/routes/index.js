@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/',(req, res) => {
-    res.redirect('/register')
+    // res.redirect('/register')
+    res.send(req.isAuthenticated())
 })
 
 require('./authentication/login')(router)

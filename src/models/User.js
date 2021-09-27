@@ -4,6 +4,22 @@ const bcrypt = require('bcrypt')
 const Scheme = mongoose.Schema
 
 const UserScheme = new Scheme({
+    firstName: {
+        type: String,
+        required: false
+    },
+    lastName: {
+        type: String,
+        required: false
+    },
+    age: {
+        type: Number,
+        required: false
+    },
+    agree: {
+        type: Boolean,
+        required: false
+    },
     email: {
         type: String,
         required: true,

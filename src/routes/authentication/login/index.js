@@ -14,7 +14,7 @@ module.exports = loginRoute = (router) => {
           if (err) return next(err)
           const body = { _id: user._id, email: user.email }
 
-          const token = jwt.sign({ user: body }, process.env.TOP_SECRET)
+          const token = jwt.sign({ user: body }, process.env.TOP_SECRET, {expiresIn: 5000})
           return res.json({ token, isAuthenticated: req.isAuthenticated() })
         })
       }
