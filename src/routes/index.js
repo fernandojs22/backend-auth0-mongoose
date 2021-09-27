@@ -9,5 +9,6 @@ require('./authentication/login')(router)
 require('./authentication/register')(router)
 require('./authentication/logout')(router)
 require('./profile')(router)
+require('./employees')(router)
 
 module.exports = router
