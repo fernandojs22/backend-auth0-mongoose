@@ -22,7 +22,6 @@ passport.use('register-local-email', new localStrategy({
 
 passport.use(new jwtStrategy({
     secretOrKey: process.env.ACCESS_TOKEN_SECRET,
-    // jwtFromRequest: ExtractJwt.fromUrlQueryParameter('secret_token')
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 }, async (token, done) => {
     try {
