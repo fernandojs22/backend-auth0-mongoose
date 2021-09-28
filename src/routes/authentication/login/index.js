@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken')
 
 module.exports = loginRoute = (router) => {
 
+  // function generateAccessToken(user) {
+  //   return jwt.sign({ user: body }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s'})
+  // }
+
   router.post('/login/local', async (req, res, next) => {
     passport.authenticate('login-local-email', async (err, user, info) => {
       try {
@@ -14,7 +18,9 @@ module.exports = loginRoute = (router) => {
           if (err) return next(err)
           const body = { _id: user._id, email: user.email }
 
+          // const token = generateAccessToken(user)
           const token = jwt.sign({ user: body }, process.env.ACCESS_TOKEN_SECRET)
+          // const refreshToken = jwt.sign({ user: body }, process.env.REFRESH_TOKEN_SECRET)
           return res.json({ token, isAuthenticated: req.isAuthenticated() })
         })
       }
@@ -23,5 +29,7 @@ module.exports = loginRoute = (router) => {
       }
     })(req, res, next)
   })
+
+
   
 }
