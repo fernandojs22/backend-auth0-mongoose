@@ -6,6 +6,8 @@ require('./routes/authentication/login')(router)
 require('./routes/authentication/register')(router)
 require('./routes/authentication/logout')(router)
 require('./routes/authentication/reset')(router)
+require('./routes/authentication/change-password')(router)
+
 
 const PORT = process.env.PORT_AUTHENTICATION
 

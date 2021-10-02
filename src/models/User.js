@@ -28,7 +28,11 @@ const UserScheme = new Scheme({
     password: {
         type: String,
         required: true
-    }
+    },
+    userName: {
+        type: String,
+        unique: true
+    },
 })
 
 UserScheme.pre('save', async function(next){
