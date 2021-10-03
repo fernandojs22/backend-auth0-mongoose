@@ -2,10 +2,11 @@ require('dotenv').config()
 const passport = require('passport')
 const User = require('../../../models/User')
 const bcrypt = require('bcrypt')
+const { CHANGE_PASSWORD } = require('../../routes')
 
 module.exports = resetRoute = (router) => {
 
-  router.put('/change-password', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  router.put(CHANGE_PASSWORD, passport.authenticate('jwt', { session: false }), (req, res, next) => {
     
     const { _id, password, newPassword} = req.body
 

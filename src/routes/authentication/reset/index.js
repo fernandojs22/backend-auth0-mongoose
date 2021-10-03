@@ -3,8 +3,7 @@ const nodemailer = require('nodemailer')
 const ids = require('short-id');
 const bcrypt = require('bcrypt')
 const User = require('../../../models/User')
-
-
+const { RESET } = require('../../routes')
 
 module.exports = resetRoute = (router) => {
 
@@ -43,7 +42,7 @@ module.exports = resetRoute = (router) => {
     }
   }
 
-  router.post('/reset', (req, res, next) => {
+  router.post(RESET, (req, res, next) => {
 
     sentCurrentPass(req.query.email, (response) => {
       mailOptions.to = req.query.email
