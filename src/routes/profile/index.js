@@ -1,9 +1,10 @@
 const passport = require('passport')
 const User = require('../../models/User')
+const { PROFILE } = require('../routes')
 
 module.exports = profileRoute = (router) => {
 
-  router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  router.get(PROFILE, passport.authenticate('jwt', { session: false }), (req, res, next) => {
     res.json({
       message: 'You did it!',
       user: req.user,
@@ -11,9 +12,12 @@ module.exports = profileRoute = (router) => {
     })
   })
 
-  router.put('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  router.put(PROFILE, passport.authenticate('jwt', { session: false }), (req, res, next) => {
 
-    const { _id, email, id, ...body} = req.body
+    const { _id, password, agree, __v, authorities, createdBy, createdDate, lastModifiedBy, lastModifiedDate, email, id, ...body} = req.body
+
+    body.lastModifiedBy = req.user.email
+    body.lastModifiedDate = new Date()
 
     try {
       User.findOne({_id: _id }, async (err, emp) => {

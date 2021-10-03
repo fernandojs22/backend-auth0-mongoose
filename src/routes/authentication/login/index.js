@@ -1,5 +1,6 @@
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
+const { LOGIN_LOCAL } = require('../../routes')
 
 module.exports = loginRoute = (router) => {
 
@@ -7,7 +8,7 @@ module.exports = loginRoute = (router) => {
   //   return jwt.sign({ user: body }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s'})
   // }
 
-  router.post('/login/local', async (req, res, next) => {
+  router.post(LOGIN_LOCAL, async (req, res, next) => {
     passport.authenticate('login-local-email', async (err, user, info) => {
       try {
         if (err || !user) {
@@ -29,7 +30,4 @@ module.exports = loginRoute = (router) => {
       }
     })(req, res, next)
   })
-
-
-  
 }

@@ -1,8 +1,9 @@
 require('method-override')
+const { LOGOUT } = require('../../routes')
 
 module.exports = logoutRoute = (router) => {
 
-  router.delete('/logout', (req, res, next) => {
+  router.delete(LOGOUT, (req, res, next) => {
     req.logOut()
     res.redirect('/')
 

@@ -26,6 +26,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "short-id": "^0.1.0-1",
-    "short-uuid": "^4.2.0"
+    "short-uuid": "^4.2.0",
+    "unique-names-generator": "^4.6.0"
   }
 }

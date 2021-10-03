@@ -27,11 +27,10 @@ passport.use(new jwtStrategy({
     try {
 
         User.findOne({_id: token.user._id}, (err, user) => {
-            const { password, agree, __v, ...userInformation } = user._doc
+            const { password, agree, __v, authorities, createdBy, createdDate, lastModifiedBy, lastModifiedDate, ...userInformation } = user._doc
             return done(null, userInformation)
         })   
     } catch (e) {
         done(e)
     }
 }))
-

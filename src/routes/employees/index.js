@@ -1,9 +1,11 @@
 const passport = require('passport')
 const Employee = require('../../models/Employee')
+const { EMPLOYEES } = require('../routes')
+const { verifyRole } = require('../../roles')
 
 module.exports = profileRoute = (router) => {
 
-  router.get('/employees', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  router.get(EMPLOYEES, passport.authenticate('jwt', { session: false }), verifyRole(EMPLOYEES),(req, res, next) => {
     try {
       Employee.find({}, async (err, docs) => {
 
@@ -17,7 +19,21 @@ module.exports = profileRoute = (router) => {
     }
   })
 
-  router.post('/employees', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  router.get(`${EMPLOYEES}/:employeeId`, passport.authenticate('jwt', { session: false }), verifyRole(EMPLOYEES),(req, res, next) => {
+    try {
+      Employee.findOne({ _id: req.params.employeeId }, async (err, doc) => {
+
+        if (err) throw err
+        if (!doc) res.json({ message: 'No doc' })
+
+        res.json(doc)
+      })
+    } catch (err) {
+      res.json({ error: err })
+    }
+  })
+
+  router.post(EMPLOYEES, passport.authenticate('jwt', { session: false }), (req, res, next) => {
     try {
       Employee.findOne({ email: req.email }, async (err, emp) => {
 
@@ -34,7 +50,7 @@ module.exports = profileRoute = (router) => {
     }
   })
 
-  router.put('/employees', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  router.put(EMPLOYEES, passport.authenticate('jwt', { session: false }), (req, res, next) => {
 
     const { _id, email, id, ...body} = req.body
 
@@ -55,7 +71,7 @@ module.exports = profileRoute = (router) => {
   })
 
 
-  router.delete('/employees', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  router.delete(EMPLOYEES, passport.authenticate('jwt', { session: false }), (req, res, next) => {
 
     const { _id, email, id, ...body} = req.body
 
