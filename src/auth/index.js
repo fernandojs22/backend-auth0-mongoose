@@ -28,6 +28,13 @@ passport.use(new jwtStrategy({
 
         User.findOne({_id: token.user._id}, (err, user) => {
             const { password, agree, __v, authorities, createdBy, createdDate, lastModifiedBy, lastModifiedDate, ...userInformation } = user._doc
+
+            userInformation.roles = []
+
+            authorities.map((role) => {
+                userInformation.roles.push(role) 
+            })
+
             return done(null, userInformation)
         })   
     } catch (e) {

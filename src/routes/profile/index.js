@@ -14,7 +14,7 @@ module.exports = profileRoute = (router) => {
 
   router.put(PROFILE, passport.authenticate('jwt', { session: false }), (req, res, next) => {
 
-    const { _id, password, agree, __v, authorities, createdBy, createdDate, lastModifiedBy, lastModifiedDate, email, id, ...body} = req.body
+    const { _id, password, agree, __v, authorities, createdBy, createdDate, lastModifiedBy, lastModifiedDate, email, id, roles, ...body} = req.body
 
     body.lastModifiedBy = req.user.email
     body.lastModifiedDate = new Date()
