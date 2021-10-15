@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const { uniqueNamesGenerator, NumberDictionary, adjectives, colors, animals } = require('unique-names-generator')
 
-
 const Scheme = mongoose.Schema
 
 const UserScheme = new Scheme({
@@ -43,7 +42,7 @@ const UserScheme = new Scheme({
         type: String
     },
     createdDate: {
-        type: Date      
+        type: Date
     },
     lastModifiedBy: {
         type: String
@@ -56,14 +55,15 @@ const UserScheme = new Scheme({
     }
 })
 
-const numberDictionary = NumberDictionary.generate({ min: 100, max: 999 });
-
-const shortName = uniqueNamesGenerator({
-    dictionaries: [adjectives, animals, numberDictionary],
-    separator: '_'
-});
-
 UserScheme.pre('save', async function (next) {
+
+    const numberDictionary = NumberDictionary.generate({ min: 100, max: 999 });
+
+    const shortName = uniqueNamesGenerator({
+        dictionaries: [adjectives, animals, numberDictionary],
+        separator: '_'
+    });
+
 
     const hash = await bcrypt.hash(this.password, 10)
     this.password = hash
