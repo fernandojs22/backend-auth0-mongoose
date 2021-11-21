@@ -2,3 +2,5 @@
 node_modules/
 deploy/
 package-lock.json
+
+deploy/requests.rest
