@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { ApolloServer,  } = require('apollo-server-express')
+const { ApolloServer } = require('apollo-server-express')
 const { typeDefs, resolvers } = require('./graphQL/index-apollo')
 // const { makeExecutableSchema } = require('apollo-server-express')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
