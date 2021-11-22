@@ -8,6 +8,9 @@ module.exports = new GraphQLObjectType({
     name: "Employee",
     description: "This represent a employee object",
     fields: () => ({
+        _id: {
+            type: new GraphQLNonNull(GraphQLString)
+        },
         id: {
             type: new GraphQLNonNull(GraphQLString)
         },
