@@ -1,11 +1,15 @@
 require('dotenv').config()
 const { graphqlHTTP } = require('express-graphql')
 const { schema } = require('./graphQL/index-express')
+const { applyMiddleware } = require('graphql-middleware')
+const { shield } = require('graphql-shield')
 const session = require('express-session')
 const passport = require('passport')
 const jwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const User = require('./models/User')
+
+const isAuthenticated = require('./graphQL/rules/is-authenticated')
 
 const PORT = process.env.PORT_DATABASE
 
@@ -53,11 +57,22 @@ module.exports = Server = (app) => {
         })(req, res, next)
     })
 
+    const permissions = shield({
+        Query: {
+            employee: isAuthenticated,
+            employees: isAuthenticated
+        }
+        // Mutation: {}
+    })
+
+    const schemaWithPermissions = applyMiddleware(schema, permissions)
+
     app.use('/graphql', graphqlHTTP({
         graphiql: {
             headerEditorEnabled: true
         },
-        schema: schema,
+        // schema: schema,
+        schema: schemaWithPermissions,
     }))
 
     return app.listen(PORT, () => {
