@@ -1,6 +1,7 @@
 module.exports = {
     Employee: `
     type Employee {
+    _id: ID!,
     id: ID!,
     firstName: String,
     lastName: String,

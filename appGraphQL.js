@@ -13,5 +13,5 @@ middlewares(app)
 
 initializeMongoose()
 
-ServerExpress(app) // express-graphql
-// ServerApollo() // apollo-server-express
+// ServerExpress(app) // express-graphql
+ServerApollo() // apollo-server-express

@@ -15,12 +15,8 @@ const employee = {
         }
     },
     resolve: async (parent, args, context) => {
-        if (context.user) {
-            const data = await Employee.findOne({ _id: args.employeeId })
-            return data
-        } else {
-            throw new Error('new Error')
-        }
+        const data = await Employee.findOne({ _id: args.employeeId })
+        return data
     }
 }
 
@@ -28,12 +24,8 @@ const employees = {
     type: new GraphQLList(EmployeeType),
     description: "List of All Employees",
     resolve: async (parent, args, context) => {
-        if (context.user) {
-            const data = await Employee.find({})
-            return data
-        } else {
-            throw new Error('new Error')
-        }
+        const data = await Employee.find({})
+        return data
     }
 }
 
